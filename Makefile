@@ -1,0 +1,53 @@
+# STM8 device
+DEVICE = STM8S103
+
+# trap handling requires SDCC >= v3.4.3
+SKIP_TRAPS = 0
+
+# set compiler path & parameters 
+CC      = sdcc
+CFLAGS  = -mstm8 -lstm8 --opt-code-size --std-c99
+
+# set output folder and target name
+OUTPUT_DIR = $(DEVICE)
+TARGET     = $(OUTPUT_DIR)/$(DEVICE).hex
+
+# set project folder and files (all *.c)
+PRJ_ROOT    = .
+PRJ_SRC_DIR = $(PRJ_ROOT)
+PRJ_INC_DIR = $(PRJ_ROOT)
+PRJ_SOURCE  = $(notdir $(wildcard $(PRJ_SRC_DIR)/*.c))
+PRJ_OBJECTS := $(addprefix $(OUTPUT_DIR)/, $(PRJ_SOURCE:.c=.rel))
+
+# set SPL paths
+SPL_ROOT    = /opt/STM8S_StdPeriph_Lib
+SPL_SRC_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/src
+SPL_INC_DIR = $(SPL_ROOT)/Libraries/STM8S_StdPeriph_Driver/inc
+SPL_SOURCE  = 
+SPL_OBJECTS := $(addprefix $(OUTPUT_DIR)/, $(SPL_SOURCE:.c=.rel))
+
+# collect all include folders
+INCLUDE = -I$(PRJ_SRC_DIR) -I$(SPL_INC_DIR)
+
+# collect all source directories
+VPATH = $(PRJ_SRC_DIR):$(SPL_SRC_DIR)
+
+.SUFFIXES:
+.SUFFIXES: .c .h .rel .hex
+.PHONY: all clean
+
+all: $(TARGET)
+
+$(OUTPUT_DIR)/%.rel: %.c | $(OUTPUT_DIR)/..
+	@echo '   ' [CC] $(@F); \
+	$(CC) $(CFLAGS) $(INCLUDE) -D$(DEVICE) -DSKIP_TRAPS=$(SKIP_TRAPS) -c $< -o $@
+
+$(TARGET): $(PRJ_OBJECTS) $(SPL_OBJECTS) | $(OUTPUT_DIR)/..
+	@echo '   ' [LD] $(@F); \
+	$(CC) $(CFLAGS) -o $(TARGET) $^
+
+%/..:
+	mkdir -p $(@D)
+
+clean: 
+	rm -fr $(OUTPUT_DIR)/*
