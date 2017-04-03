@@ -4,11 +4,11 @@ stm8s 4-channel capacitive touch switch module for driving ssr relays
 
 ## Pin assignments
 
-|               |               |               |          |            |             |           |           |              |              |
-|---------------|---------------|---------------|----------|------------|-------------|-----------|-----------|--------------|--------------|
-|    IN3 (D3)   |    IN2 (D2)   |   SWIM (D1)   | IN1 (C7) |  OUT4 (C6) |  OUT3 (C5)  | OUT2 (C4) | OUT1 (C3) | I2C_SCL (B4) | I2C_SDA (B5) |
-| Reserved (D4) | Reserved (D5) | Reserved (D6) |    RST   | OSCIN (A1) | OSCOUT (A2) |    GND    |     5V    |      3V3     |   IN4 (A3)   |
-|               |               |               |          |            |             |           |           |              |              |
+|               |               |               |          |            |             |          |           |              |              |
+|---------------|---------------|---------------|----------|------------|-------------|----------|-----------|--------------|--------------|
+|   OUT1 (D3)   |   OUT2 (D2)   |   SWIM (D1)   | IN4 (C7) |  IN3 (C6)  |   IN2 (C5)  | IN1 (C4) | OUT3 (C3) | I2C_SCL (B4) | I2C_SDA (B5) |
+| Reserved (D4) | Reserved (D5) | Reserved (D6) |    RST   | OSCIN (A1) | OSCOUT (A2) |    GND   |     5V    |      3V3     |   OUT4 (A3)  |
+|               |               |               |          |            |             |          |           |              |              |
 
 ## How to build
 
