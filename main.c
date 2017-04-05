@@ -1,10 +1,11 @@
-/* MAIN.C file
- * 
- * Copyright (c) 2002-2005 STMicroelectronics
- */
-
+#include "stm8s.h"
+#include "io.h"
 
 main()
 {
-	while (1);
+	io_init();
+
+	while (1)
+	{
+	}
 }
