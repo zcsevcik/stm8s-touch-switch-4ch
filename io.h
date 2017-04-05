@@ -6,5 +6,6 @@
 void    io_init(void);
 uint8_t io_read(void);
 void    io_write(uint8_t);
+void    io_callback(void);
 
 #endif //IO_H_
