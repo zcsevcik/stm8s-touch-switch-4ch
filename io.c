@@ -33,9 +33,11 @@ io_read(void)
 void
 io_write(uint8_t val)
 {
+	// active low
+	
 #define io_bitset(BitStatus, Port, Pin) do { \
-	void (*pfnGpioWrite)(GPIO_TypeDef*, GPIO_Pin_TypeDef) = &GPIO_WriteLow; \
-	if (!!(BitStatus)) pfnGpioWrite = &GPIO_WriteHigh; \
+	void (*pfnGpioWrite)(GPIO_TypeDef*, GPIO_Pin_TypeDef) = &GPIO_WriteHigh; \
+	if (!!(BitStatus)) pfnGpioWrite = &GPIO_WriteLow; \
 	pfnGpioWrite((Port), (Pin)); \
 } while (0)
 
