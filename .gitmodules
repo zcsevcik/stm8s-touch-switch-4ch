@@ -1,0 +1,3 @@
+[submodule "STM8S_StdPeriph"]
+	path = STM8S_StdPeriph
+	url = https://github.com/roshbaby/stm8s-sdcc
