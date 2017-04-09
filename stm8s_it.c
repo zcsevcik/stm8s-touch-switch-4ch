@@ -32,6 +32,7 @@
 
 #include "iic.h"
 #include "io.h"
+#include "modbus.h"
 
 /** @addtogroup Template_Project
   * @{
