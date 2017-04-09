@@ -29,6 +29,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s_it.h"
+
+#include "iic.h"
 #include "io.h"
 
 /** @addtogroup Template_Project
@@ -356,6 +358,7 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+  modbus_tx_callback();
   return;
  }
 
@@ -369,6 +372,7 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+  modbus_rx_callback();
   return;
  }
 #endif /* (STM8S208) || (STM8S207) || (STM8S103) || (STM8S903) || (STM8AF62Ax) || (STM8AF52Ax) */
@@ -411,6 +415,7 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+  iic_callback();
   return;
 }
 
